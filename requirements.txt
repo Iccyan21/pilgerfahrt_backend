@@ -1,0 +1,12 @@
+インストールしたやつ
+djangorestframework 
+cmd: pip install djangorestframework
+
+corsheaders
+cmd:pip install django-cors-headers
+
+pillow
+pip install pillow
+
+corsheaders
+pip install django-cors-headers
