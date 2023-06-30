@@ -5,5 +5,5 @@ from .models import Place
 class PlaceSerializer(serializers.ModelSerializer):
     class Meta:
         model = Place
-        fields = ['placeid','animeid','name', 'address','descpiption','notes','accsess','placeimage','lat','lng']  # シリアライズするフィールドのリスト
+        fields = ['placeid','animeid','animetitle','name', 'address','descpiption','notes','accsess','placeimage','lat','lng']  # シリアライズするフィールドのリスト
         

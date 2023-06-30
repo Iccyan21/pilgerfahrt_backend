@@ -47,4 +47,11 @@ class PlaceSearchAPIView(APIView):
     def get(self, request):
         queryset = self.get_queryset()
         serializer = PlaceSerializer(queryset, many=True)
-        return Response(serializer.data)
+        
+        data = serializer.data
+
+        for item in data:
+            item['placeimage'] = unquote(item['placeimage'])
+
+        return Response(data)
+    

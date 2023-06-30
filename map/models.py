@@ -18,8 +18,8 @@ class Place(models.Model):
     placeimage = models.ImageField('画像', upload_to='place_images/')
     lat = models.DecimalField('緯度', max_digits=9, decimal_places=7)
     lng = models.DecimalField('経度', max_digits=10, decimal_places=7)
-    animeid = models.ForeignKey(Anime, on_delete=models.PROTECT,to_field='amineid',  related_name='anime')
-
+    animeid = models.ForeignKey(Anime, on_delete=models.PROTECT,to_field='animeid',  related_name='anime')
+    animetitle = models.ForeignKey(Anime, on_delete=models.PROTECT,to_field='title',  related_name='animetitle')
      
     objects = PlaceManager()
 

@@ -4,4 +4,4 @@ from .models import Anime
 class AnimeSerializer(serializers.ModelSerializer):
     class Meta:
         model = Anime
-        fields = ['amineid','animeimage','title', 'description']  # シリアライズするフィールドのリスト
+        fields = ['animeid','animeimage','title', 'description']  # シリアライズするフィールドのリスト

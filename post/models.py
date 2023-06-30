@@ -7,7 +7,7 @@ class Post(models.Model):
     postid = models.IntegerField('投稿ID', primary_key=True,unique=True,auto_created=True)
     userid = models.ForeignKey(User, on_delete=models.PROTECT,to_field='userid',  related_name='users')
     placeid = models.ForeignKey(Place, on_delete=models.PROTECT,to_field='placeid',  related_name='posts')
-    animeid = models.ForeignKey(Anime, on_delete=models.PROTECT,to_field='amineid', related_name='animeid')
+    animeid = models.ForeignKey(Anime, on_delete=models.PROTECT,to_field='animeid', related_name='anime_id')
     title = models.CharField(max_length=20)
     description = models.CharField(max_length=500)
     postimage = models.ImageField('画像', upload_to='post_images/',blank=True, null=True)

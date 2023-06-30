@@ -6,6 +6,7 @@ from .models import Anime
 from .serializers import AnimeSerializer
 from django.shortcuts import get_object_or_404
 from rest_framework.response import Response
+from urllib.parse import unquote
 # Create your views here.
 
 # 全て表示する処理
@@ -13,7 +14,12 @@ class AnimeListAPIView(APIView):
     def get(self, request):
         anime = Anime.objects.all()
         serializer = AnimeSerializer(anime, many=True)
-        return Response(serializer.data)
+        data = serializer.data
+
+        for item in data:
+            item['animeimage'] = unquote(item['animeimage'])
+
+        return Response(data)
     
 # titleからdataを取得して、APIに送る
 class AnimeDetailView(APIView):
