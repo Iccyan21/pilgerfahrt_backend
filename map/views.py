@@ -8,6 +8,7 @@ from .serializers import PlaceSerializer
 from rest_framework.response import Response
 from django.db.models import Q
 import googlemaps
+from django.core.exceptions import ImproperlyConfigured
 import os
 # Create your views here.
 
@@ -58,8 +59,7 @@ class PlaceSearchAPIView(APIView):
 
         return Response(data)
 
-from django.core.exceptions import ImproperlyConfigured
-import os
+
 
 class DirectionsView(APIView):
     def get(self, request, *args, **kwargs):
