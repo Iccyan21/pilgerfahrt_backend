@@ -4,7 +4,7 @@ from rest_framework.generics import GenericAPIView
 from rest_framework.views import APIView
 from rest_framework.viewsets import ModelViewSet
 from rest_framework.permissions import AllowAny
-
+from django.contrib.auth.decorators import login_required
 from django.conf import settings
 from django.contrib.auth import login, logout
 from django.http import JsonResponse
@@ -13,6 +13,7 @@ from .models import AccessToken, User
 from .serializers import LoginSerializer, RegisterSerializer, UserUpdateSerializer, CloseAccountSerializer
 from rest_framework import permissions
 from rest_framework.permissions import IsAuthenticated
+from django.views.decorators.csrf import csrf_exempt
 
 class LoginView(GenericAPIView):
     """ログインAPIクラス"""
@@ -134,3 +135,11 @@ class CloseAccountView(APIView):
             raise Response("No User found")
 
         return Response({"message": "Account and user successfully removed"}, status=200)
+    
+@csrf_exempt
+def profile(request,userid):
+    user = User.objects.get(userid=userid)
+    return JsonResponse({
+        'userid': user.userid,
+        'name': user.name
+    })

@@ -60,7 +60,7 @@ class PlaceSearchAPIView(APIView):
         return Response(data)
 
 
-
+#
 class DirectionsView(APIView):
     def get(self, request, *args, **kwargs):
         # 環境変数からAPIキーを取得します

@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'post',
     'anime',
     'rest_framework',
+    'rest_framework.authtoken',
     'corsheaders',
 ]
 
@@ -143,3 +144,8 @@ CORS_ORIGIN_ALLOW_ALL = True
 STATIC_URL = '/static/'
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+AUTHENTICATION_BACKENDS = [
+    'django.contrib.auth.backends.ModelBackend',
+    # 他の認証バックエンドを追加する場合はここに記述します
+]
