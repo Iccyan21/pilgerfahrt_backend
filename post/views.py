@@ -46,25 +46,21 @@ class PostAPIView(APIView):
 # 投稿機能
 from rest_framework.authentication import TokenAuthentication
 
-class CreatePostView(generics.CreateAPIView):
-    queryset = Post.objects.all()
-    serializer_class = PostSerializer
-    permission_classes = [permissions.IsAuthenticated]
-    authentication_classes = [TokenAuthentication]  # アクセストークンを利用するための認証クラスを追加
+class PostCreateView(APIView):
+    def post(self, request, placeid=None):
+        serializer = PostSerializer(data=request.data)
+        
+        print(request.data)
+        
+        print(serializer.is_valid())
+        
 
-    def perform_create(self, serializer):
-        placeid = self.kwargs.get('placeid')
-        animeid = self.request.data.get('animeid')
-        place = Place.objects.get(id=placeid)
-        anime = Anime.objects.get(id=animeid)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        
+        print(serializer.errors)
 
-        # アクセストークンの検証
-        user = self.request.user
-        access_token = AccessToken.objects.filter(user=user).first()
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-        if access_token:
-            # アクセストークンが存在する場合は投稿を作成
-            serializer.save(userid=user, placeid=place, animeid=anime)
-        else:
-            # アクセストークンが存在しない場合はエラーを返す
-            raise serializers.ValidationError('アクセストークンが無効です')
+

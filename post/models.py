@@ -4,10 +4,10 @@ from accounts.models import User
 from anime.models import Anime
 
 class Post(models.Model):
-    postid = models.IntegerField('投稿ID', primary_key=True,unique=True,auto_created=True)
+    postid = models.AutoField('投稿ID', primary_key=True)
     userid = models.ForeignKey(User, on_delete=models.PROTECT,to_field='userid',  related_name='users')
     placeid = models.ForeignKey(Place, on_delete=models.PROTECT,to_field='placeid',  related_name='posts')
-    placename = models.ForeignKey(Place, on_delete=models.PROTECT,to_field='name',  related_name='postname')
+    placename = models.ForeignKey(Place, on_delete=models.PROTECT,to_field='name',  null = True, related_name='postname')
     animeid = models.ForeignKey(Anime, on_delete=models.PROTECT,to_field='animeid', related_name='anime_id')
     title = models.CharField(max_length=20)
     description = models.CharField(max_length=500)
